@@ -1,46 +1,6 @@
 @charset "UTF-8";
-@font-face {
-  font-family: "Gotham Pro";
-  font-weight: 300;
-  font-style: normal;
-  src: url("../fonts/GothaProLig_1.otf") format("truetype"); }
-@font-face {
-  font-family: "Gotham Pro";
-  font-weight: 300;
-  font-style: italic;
-  src: url("../fonts/GothaProLigIta_1.otf") format("truetype"); }
-@font-face {
-  font-family: "Gotham Pro";
-  font-weight: 400;
-  font-style: normal;
-  src: url("../fonts/GothaProReg_1.otf") format("truetype"); }
-@font-face {
-  font-family: "Gotham Pro";
-  font-weight: 400;
-  font-style: italic;
-  src: url("../fonts/GothaProIta_1.otf") format("truetype"); }
-@font-face {
-  font-family: "Gotham Pro";
-  font-weight: 500;
-  font-style: normal;
-  src: url("../fonts/GothaProMed_1.otf") format("truetype"); }
-@font-face {
-  font-family: "Gotham Pro";
-  font-weight: 500;
-  font-style: italic;
-  src: url("../fonts/GothaProMedIta_1.otf") format("truetype"); }
-@font-face {
-  font-family: "Gotham Pro";
-  font-weight: 700;
-  font-style: normal;
-  src: url("../fonts/GothaProBol_1.otf") format("truetype"); }
-@font-face {
-  font-family: "Gotham Pro";
-  font-weight: 700;
-  font-style: italic;
-  src: url("../fonts/GothaProBolIta_1.otf") format("truetype"); }
 body {
-  font-family: "Gotham Pro", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 14px;
   color: #000000;
   min-height: 100vh; }
@@ -152,7 +112,7 @@ button {
   display: flex;
   -ms-align-items: center;
   align-items: center;
-  font-family: "Gotham Pro", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 500;
   font-size: 15px; }
   .header-tel a {
@@ -230,7 +190,7 @@ button {
 .page-header__navbar nav {
   padding: 0; }
 .page-header__navbar .navbar__items {
-  font-family: "Gotham Pro", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 15px;
   margin: 16px 0px; }
 
@@ -546,13 +506,15 @@ button {
     justify-content: center;
     align-items: center; }
   .advantages__title {
-    font-weight: 500;
-    font-size: 16px; }
+    font-weight: 600;
+    font-size: 18px; }
   .advantages__image {
     height: 120px;
     width: 120px;
     margin-bottom: 20px;
     background-size: cover; }
+  .advantages__text {
+    font-size: 16px; }
 
 .in-cart {
   margin-top: 14px;
@@ -1486,6 +1448,53 @@ footer {
   .search-results-title {
     text-align: center;
     margin-top: -27px; }
+
+.filter {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 40px 0; }
+  @media (max-width: 680px) {
+    .filter {
+      margin: 0 0 20px 0;
+      flex-direction: column;
+      align-items: baseline; } }
+  .filter__text {
+    flex-shrink: 0;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000; }
+  .filter__item {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 50px; }
+    @media (max-width: 680px) {
+      .filter__item {
+        margin: 10px 0 0 0; } }
+    .filter__item:hover {
+      opacity: .7; }
+    .filter__item:active {
+      opacity: .5; }
+    .filter__item-text {
+      flex-grow: 1;
+      font-size: 18px;
+      color: #000000; }
+    .filter__item-arrow {
+      flex-shrink: 0;
+      width: 15px;
+      height: 15px;
+      margin-left: 15px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: all .2s linear; }
+    .filter__item_asc .filter__item-arrow {
+      transform: rotate(-180deg); }
 
 .title-2 {
   margin: 35px 0;

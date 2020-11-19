@@ -165,53 +165,53 @@ function secondsidebar() {
 
 function tovarslider() {
   $('.product-slider-big').slick({
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: false,
-  fade: true,
-});
-$('.product-slider-small').slick({
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  asNavFor: '.product-slider-big',
-  arrows: true,
-  dots: false,
-  centerMode: true,
-  focusOnSelect: true,
-  autoplay: true,
-  autoplaySpeed: 4000,
-  responsive: [
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 2,
-      }
-    },
-    {
-      breakpoint: 767,
-      settings: {
-        slidesToShow: 3,
-      }
-    },
-    {
-      breakpoint: 576,
-      settings: {
-        slidesToShow: 2,
-      }
-    },
-  ]
-});
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+  });
+  $('.product-slider-small').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    asNavFor: '.product-slider-big',
+    arrows: true,
+    dots: false,
+    centerMode: true,
+    focusOnSelect: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 3,
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+    ]
+  });
 }
 
 function modalslider() {
   function initmodalslider() {
     $('.modal-slider').slick({
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-  });
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+    });
   }
-    $('.prod-preview').on('shown.bs.modal', initmodalslider);
+  $('.prod-preview').on('shown.bs.modal', initmodalslider);
 }
 
 
@@ -227,3 +227,151 @@ $(document).ready(function() {
   tovarslider();
   modalslider();
 });
+
+
+
+window.onload = function () {
+
+  // Сортировка по цене
+  function sortPriceDesc() {
+    var items = document.querySelectorAll('.product-catalog .product-card');
+    var parent = document.querySelector('.product-catalog');
+    var array = new Array();
+    var SortElements = new Object();
+    items.forEach(function(item, indx){
+      var id = parseInt(item.getAttribute('id'));
+      var itemValue = parseInt(item.querySelector('.product-price__new').textContent.replace('$', '').replace(/\s+/g, ''));
+      SortElements[id] = {'value': itemValue, 'element': item, 'index': id} ;
+    });
+
+    for (key in SortElements) {
+      array.push(SortElements[key]);
+    }
+
+    function compareNumeric(a, b) {
+      a = parseInt(a.value);
+      b = parseInt(b.value);
+      if (a < b) return 1;
+      if (a > b) return -1;
+    }
+
+    array.sort(compareNumeric);
+
+    array.map(function(indx){
+      parent.insertAdjacentElement('beforeend', SortElements[indx.index]['element']);
+    });
+  }
+
+  function sortPriceAsc() {
+    var items = document.querySelectorAll('.product-catalog .product-card');
+    var parent = document.querySelector('.product-catalog');
+    var array = new Array();
+    var SortElements = new Object();
+    items.forEach(function(item, indx){
+      var id = parseInt(item.getAttribute('id'));
+      var itemValue = parseInt(item.querySelector('.product-price__new').textContent.replace('$', '').replace(/\s+/g, ''));
+      SortElements[id] = {'value': itemValue, 'element': item, 'index': id} ;
+    });
+
+    for (key in SortElements) {
+      array.push(SortElements[key]);
+    }
+
+    function compareNumeric(a, b) {
+      a = parseInt(a.value);
+      b = parseInt(b.value);
+      if (a > b) return 1;
+      if (a < b) return -1;
+    }
+
+    array.sort(compareNumeric);
+
+    array.map(function(indx){
+      parent.insertAdjacentElement('beforeend', SortElements[indx.index]['element']);
+    });
+  }
+
+  document.querySelector('.js-filter-price').addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!this.classList.contains('filter__item_desc')) {
+      sortPriceDesc();
+      this.classList.add('filter__item_desc');
+      this.classList.remove('filter__item_asc');
+    } else {
+      sortPriceAsc();
+      this.classList.remove('filter__item_desc');
+      this.classList.add('filter__item_asc');
+    }
+  });
+
+  // Сортировка по имени
+  function sortNameDesc() {
+    var items = document.querySelectorAll('.product-catalog .product-card');
+    var parent = document.querySelector('.product-catalog');
+    var array = new Array();
+    var SortElements = new Object();
+    items.forEach(function(item, indx){
+      var id = parseInt(item.getAttribute('id'));
+      var itemValue = item.querySelector('.product-card__name').textContent.trim();
+      SortElements[id] = {'value': itemValue, 'element': item, 'index': id} ;
+    });
+
+    for (key in SortElements) {
+      array.push(SortElements[key]);
+    }
+
+    function compareNumeric(a, b) {
+      a = a.value;
+      b = b.value;
+      if (a < b) return 1;
+      if (a > b) return -1;
+    }
+
+    array.sort(compareNumeric);
+
+    array.map(function(indx){
+      parent.insertAdjacentElement('beforeend', SortElements[indx.index]['element']);
+    });
+  }
+
+  function sortNameAsc() {
+    var items = document.querySelectorAll('.product-catalog .product-card');
+    var parent = document.querySelector('.product-catalog');
+    var array = new Array();
+    var SortElements = new Object();
+    items.forEach(function(item, indx){
+      var id = parseInt(item.getAttribute('id'));
+      var itemValue = item.querySelector('.product-card__name').textContent.trim();
+      SortElements[id] = {'value': itemValue, 'element': item, 'index': id} ;
+    });
+
+    for (key in SortElements) {
+      array.push(SortElements[key]);
+    }
+    function compareNumeric(a, b) {
+      a = a.value;
+      b = b.value;
+      if (a > b) return 1;
+      if (a < b) return -1;
+    }
+
+    array.sort(compareNumeric);
+
+    array.map(function(indx){
+      parent.insertAdjacentElement('beforeend', SortElements[indx.index]['element']);
+    });
+  }
+
+  document.querySelector('.js-filter-age').addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!this.classList.contains('filter__item_desc')) {
+      sortNameAsc();
+      this.classList.add('filter__item_desc');
+      this.classList.remove('filter__item_asc');
+    } else {
+      sortNameDesc();
+      this.classList.remove('filter__item_desc');
+      this.classList.add('filter__item_asc');
+    }
+  });
+}
